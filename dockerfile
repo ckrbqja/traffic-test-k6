@@ -1,4 +1,4 @@
-FROM node:15-alpine
+FROM node:15
 
 ## 현재 유저권한으로
 USER $USER
