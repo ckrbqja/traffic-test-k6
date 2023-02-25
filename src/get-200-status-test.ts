@@ -6,7 +6,7 @@ import {Trend} from "k6/metrics";
 export const TrendRTT = new Trend('RTT');
 export let options: Options = {
     vus: 1,
-    duration: '10s',
+    duration: '10m',
     thresholds: {
         'group_duration{group:::individualRequests}': [{abortOnFail: true, threshold: 'avg < 400'}],
         'RTT': ['p(99)<300', 'p(70)<250', 'avg<200', 'med<150', 'min<100']
