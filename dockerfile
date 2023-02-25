@@ -12,4 +12,4 @@ RUN apt-get install k6
 #COPY package.json .
 #RUN yarn
 #COPY . .
-CMD npm run start
+CMD yarn run start
