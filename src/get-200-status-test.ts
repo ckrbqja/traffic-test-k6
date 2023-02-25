@@ -5,7 +5,7 @@ import {Trend} from "k6/metrics";
 
 export const TrendRTT = new Trend('RTT');
 export let options: Options = {
-    vus: 1000,
+    vus: 1,
     duration: '10s',
     thresholds: {
         'group_duration{group:::individualRequests}': [{abortOnFail: true, threshold: 'avg < 400'}],
@@ -16,7 +16,20 @@ export let options: Options = {
 
 export default () => {
     group('individualRequests', () => {
-        const res = http.get('http://localhost:8081');
+        const url = 'http://k8s-argo-trafficp-8701ca3ca3-1857259736.ap-northeast-2.elb.amazonaws.com/api/external/data/result'
+        
+        const payload = JSON.stringify({
+            "order_number" : "order_number",
+            "order_item_number" : "order_item_number",
+            "result_object" :  "result_object"
+        })
+        
+        const params = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const res = http.post(url,payload,params);
         TrendRTT.add(res.timings.duration);
     })
 

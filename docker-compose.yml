@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+    k6:
+        build:
+            dockerfile: dockerfile
+            context: .
+        container_name: k6
+        ports:
+            - '8095:8095' 
