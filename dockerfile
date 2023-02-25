@@ -1,4 +1,4 @@
-FROM node:15
+FROM node:15-alpine
 
 # k6 설치
 RUN gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
@@ -6,10 +6,10 @@ RUN echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.
 RUN apt-get update
 RUN apt-get install k6
 
-WORKDIR /app
-
-COPY package.json .
-
-RUN yarn
-COPY . .
+# yarn berry 적용으로 삭제
+#WORKDIR /app
+#
+#COPY package.json .
+#RUN yarn
+#COPY . .
 CMD npm run start
