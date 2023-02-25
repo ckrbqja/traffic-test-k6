@@ -22,6 +22,7 @@
     "webpack-glob-entries": "^1.0.1"
   },
   "scripts": {
-    "start": "webpack && k6 run --out influxdb=http://localhost:8086/myk6db ./dist/get-200-status-test.js"
+    "start": "webpack && k6 run --out influxdb=http://localhost:8086/myk6db ./dist/get-200-status-test.js",
+    "start:docker": "webpack && docker run --rm -i grafana/k6 run --out influxdb=http://localhost:8086/myk6db ./dist/get-200-status-test.js"
   }
 }
