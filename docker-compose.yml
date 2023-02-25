@@ -2,6 +2,7 @@ version: '3'
 
 services:
     k6:
+        privileged: true
         build:
             dockerfile: dockerfile
             context: .
