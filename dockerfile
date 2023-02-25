@@ -1,16 +1,9 @@
 FROM node:15
 
-## 현재 유저권한으로
-USER $USER
-## docker 설치
-RUN curl -s https://get.docker.com/ | sh
-## docker-compose 설치
-RUN curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-    chmod +x /usr/local/bin/docker-compose && \
-    ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose 
-
-## docker group 에 jenkins 추가
-RUN usermod -aG docker jenkins
+RUN sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+RUN echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+RUN sudo apt-get update
+RUN sudo apt-get install k6
 
 WORKDIR /app
 
