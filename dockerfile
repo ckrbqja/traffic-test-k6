@@ -6,10 +6,11 @@ RUN echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.
 RUN apt-get update
 RUN apt-get install k6
 
+WORKDIR /app
+
 # yarn berry 적용으로 삭제
-#WORKDIR /app
-#
 #COPY package.json .
 #RUN yarn
-#COPY . .
+
+COPY . .
 CMD yarn run start
